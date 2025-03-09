@@ -5,19 +5,21 @@ import { Box, CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import { getDatabase, ref, set } from "firebase/database";
 import { app } from "./firebase/firebaseConfig"
 import Test from './components/Test';
+import Card from './components/Card';
 // import CouponCode from './components/CouponCode';
 
 const db = getDatabase(app)
 
-const putData = function () {
-  set(ref(db, "user/ikhlas"), {
-    id: 1,
-    name: "Ikhas",
-    age: 25
-  })
+// const putData = function () {
+//   set(ref(db, "user/ikhlas"), {
+//     id: 1,
+//     name: "Ikhas",
+//     age: 25
+//   })
 
-}
+// }
 // Create theme for consistent colors and spacing
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -54,13 +56,13 @@ function App() {
         bgcolor: '#f8f9fa'
       }}>
         <Header />
-        <button onClick={putData}>Put data</button>
+        {/* <button onClick={putData}>Put data</button> */}
         {/* <CouponCode /> */}
         {/* <Box component="main" >
           <TeamSection sx={{ width: '100%' }}/>
           <ServicesSection sx={{ width: '100%' }}/>
         </Box> */}
-
+         <Card/>
         <Footer sx={{ width: '100%' }} />
       </Box>
     </ThemeProvider>
