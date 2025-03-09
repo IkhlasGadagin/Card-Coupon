@@ -4,8 +4,8 @@ import Footer from './components/Footer';
 import { Box, CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import { getDatabase, ref, set } from "firebase/database";
 import { app } from "./firebase/firebaseConfig"
-import Test from './components/Test';
-import Card from './components/Card';
+// import Test from './components/Test';
+import Cards from './components/Card';
 // import CouponCode from './components/CouponCode';
 
 const db = getDatabase(app)
@@ -62,7 +62,7 @@ function App() {
           <TeamSection sx={{ width: '100%' }}/>
           <ServicesSection sx={{ width: '100%' }}/>
         </Box> */}
-         <Card/>
+         <Cards/>
         <Footer sx={{ width: '100%' }} />
       </Box>
     </ThemeProvider>

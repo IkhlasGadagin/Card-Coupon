@@ -1,8 +1,23 @@
-import { Card as MantineCard, Image, Text, Badge, Group, Button, Grid, Container } from '@mantine/core';
+import { Card as MantineCard, Image, Text, Badge, Group, Button, Grid, Container, TextInput } from '@mantine/core';
 import { useState, useEffect } from 'react';
 
 const Card = () => {
   const [data, setData] = useState([]);
+  const [inputValue, setInputValue] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch('https://fakestoreapi.comwrong/products', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ coupon: inputValue }),
+    });
+    const result = await response.json();
+    setData([...data, result]);
+    setInputValue('');
+  };
 
   const fetchData = async () => {
     const response = await fetch('https://fakestoreapi.com/products');
@@ -16,6 +31,20 @@ const Card = () => {
 
   return (
     <Container size="xl" py="xl">
+
+<form onSubmit={handleSubmit} style={{ marginBottom: '2rem' }}>
+        <Group>
+          <TextInput
+            placeholder="Enter your text"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            style={{ flex: 1 }}
+          />
+          <Button type="submit" color="blue">
+            Submit
+          </Button>
+        </Group>
+      </form>
       <Grid>
         {data.map((item) => (
           <Grid.Col key={item.id} span={{ base: 12, sm: 6, md: 4, lg: 3 }}>
@@ -42,7 +71,7 @@ const Card = () => {
                 {item.description}
               </Text>
 
-              <Group  justify="space-between" mt="md" mb="xs">
+              <Group  mt="md" mb="xs">
                 <Badge color="blue" variant="light">
                   {item.category}
                 </Badge>
